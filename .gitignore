@@ -1,0 +1,28 @@
+# Local environment
+.env
+.env.local
+.envrc.local
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Python (ETL scripts)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.python-version
+.ruff_cache/
+.mypy_cache/
+
+# Local data dumps
+*.dump
+*.sql.bak

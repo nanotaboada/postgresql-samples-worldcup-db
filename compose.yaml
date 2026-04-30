@@ -1,0 +1,23 @@
+name: worldcup2022
+
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-worldcup}
+      POSTGRES_USER: ${POSTGRES_USER:-worldcup}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-worldcup}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ./sql/schema:/docker-entrypoint-initdb.d/01-schema:ro
+      - ./sql/seed:/docker-entrypoint-initdb.d/02-seed:ro
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
