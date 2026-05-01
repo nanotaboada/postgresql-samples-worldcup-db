@@ -88,6 +88,10 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
 - `sql/init.sh` — Postgres docker-entrypoint hook that iterates and
   applies every `*.sql` file in `/repo/sql/schema/` and
   `/repo/sql/seed/` in alphabetical order.
+- Phase 1 seed — `sql/seed/01_tournament.sql`: single tournament row
+  for FIFA World Cup Qatar 2022 (year 2022, host Qatar, dates
+  2022-11-20 to 2022-12-18). `winner_team_id` left NULL; backfilled
+  in a later sub-ticket once team rows exist.
 
 ### Changed
 
