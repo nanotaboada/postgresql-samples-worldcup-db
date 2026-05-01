@@ -59,6 +59,19 @@ docs/         # Project documentation (ERD, ADRs)
 
 📐 The current entity-relationship diagram lives in [`docs/ERD.md`](docs/ERD.md). It renders natively on GitHub via Mermaid and evolves per phase as new tables land.
 
+## 🧭 Architecture Decisions
+
+Significant design decisions are captured as Architecture Decision Records in [`docs/adr/`](docs/adr/). Highlights:
+
+- [ADR-0001](docs/adr/0001-multi-edition-data-model.md) — Multi-edition data model with denormalized `tournament_id`
+- [ADR-0002](docs/adr/0002-dual-licensing.md) — Dual licensing (MIT + CC BY-NC-SA 4.0)
+- [ADR-0003](docs/adr/0003-native-postgresql-enums.md) — Native PostgreSQL ENUM types
+- [ADR-0004](docs/adr/0004-compose-override-pattern.md) — Compose Spec override pattern
+- [ADR-0005](docs/adr/0005-do-assert-verification.md) — Verification via `DO ... ASSERT` blocks
+- [ADR-0006](docs/adr/0006-smallint-identity-primary-keys.md) — `smallint GENERATED ALWAYS AS IDENTITY` PKs
+
+Full index and contribution guidelines: [`docs/adr/README.md`](docs/adr/README.md) and [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## 📜 Licenses
 
 This repository is **dual-licensed**:
@@ -69,3 +82,7 @@ This repository is **dual-licensed**:
 The data license is required because the seed data is derived from StatsBomb
 Open Data, which uses the ShareAlike clause. See [`DATA_SOURCES.md`](DATA_SOURCES.md)
 for the full chain of attribution.
+
+## 🤝 Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for commit conventions, branching, PR workflow, and the ADR three-part test. All notable changes are tracked in [`CHANGELOG.md`](CHANGELOG.md).
