@@ -6,10 +6,20 @@ The schema is **multi-edition by design**: a `tournament` root table makes every
 
 This is a sibling project to a series of educational RESTful API samples in .NET, Java, TypeScript, Python, Go, and Rust. One of those stacks will eventually consume this database to build an API and UI on top.
 
-## 🏗️ Status
+## 🗺️ Roadmap
 
-🚧 **Phase 1 scaffolding.** Schema and seed data land incrementally per the
-phased delivery plan documented in the project proposal.
+The database is built in six phases, each tracked as a GitHub epic with a sub-ticket checklist. Phases are sequential — each builds on the data landed by the previous one.
+
+| Phase                                       | Epic                                                                                | Status      |
+|---------------------------------------------|-------------------------------------------------------------------------------------|-------------|
+| **1 — Tournament Structure**                | [#4](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/4)        | ✅ complete |
+| **2 — Squads** (leagues, clubs, players, coaches) | [#14](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/14) | 🟡 next     |
+| **3 — Matches & Officials**                 | [#15](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/15)      | ⏳ pending  |
+| **4 — Lineups**                             | [#16](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/16)      | ⏳ pending  |
+| **5 — Match Events** (goals, cards, subs)   | [#17](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/17)      | ⏳ pending  |
+| **6 — Penalty Shootouts**                   | [#18](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/18)      | ⏳ pending  |
+
+Each epic body has data-source pointers, known gotchas, and per-sub-ticket model recommendations (`model:opus` for design-density tickets, `model:sonnet` for mechanical execution).
 
 ## 🐳 Quickstart
 
