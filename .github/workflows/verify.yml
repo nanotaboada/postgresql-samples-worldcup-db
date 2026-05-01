@@ -1,0 +1,42 @@
+name: verify
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Lint commit messages
+        uses: wagoid/commitlint-github-action@v6.2.1
+
+  verify:
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Boot Postgres with schema and seed applied
+        run: docker compose up --wait
+
+      - name: Run verification assertions
+        run: |
+          docker compose exec -T db \
+            psql -U worldcup -d worldcup \
+              -v ON_ERROR_STOP=on \
+              -f /repo/sql/verify/verify.sql
+
+      - name: Tear down
+        if: always()
+        run: docker compose down -v

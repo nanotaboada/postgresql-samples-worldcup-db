@@ -126,6 +126,22 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
   `goal_difference = goals_for - goals_against`,
   `position BETWEEN 1 AND 4`). Data sourced from FIFA's Qatar 2022
   official records.
+- `sql/verify/verify.sql` — Phase 1 data-integrity assertions in a
+  PL/pgSQL `DO ... ASSERT` block (per ADR-0005): row-count invariants,
+  domain integrity (Argentina is winner, group letters A-H present,
+  exactly four standings rows per group with positions 1-4), and a
+  cross-data check that the 16 group qualifiers (`position <= 2`)
+  match the 16 R16 qualifiers in `tournament_team`
+  (`final_position <= 16`). Future phases append more `DO` blocks.
+- `.github/workflows/verify.yml` — GitHub Actions CI that runs on
+  pushes and pull requests against `master`. Job 1 lints commit
+  messages with `wagoid/commitlint-github-action`. Job 2 boots the
+  Compose stack with `docker compose up --wait` and runs
+  `psql -v ON_ERROR_STOP=on -f /repo/sql/verify/verify.sql`. The first
+  failed assertion fails the job.
+- `commitlint.config.mjs` — Conventional Commits with `header-max-length`
+  and `body-max-line-length` capped at 80 characters. Mirrors the
+  config used across the six API repos.
 
 ### Changed
 
