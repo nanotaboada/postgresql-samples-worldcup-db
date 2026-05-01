@@ -110,9 +110,10 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
 - Phase 1 seed — `sql/seed/05_stadiums.sql`: the 8 venues used during
   Qatar 2022 (Lusail Stadium, Al Bayt Stadium, Khalifa International,
   Ahmad bin Ali, Education City, Al Thumama, Al Janoub, Stadium 974).
-  Listed alphabetically by name. `stadium` is a global table (no
-  `tournament_id`); venues exist independently of which edition uses
-  them.
+  Listed alphabetically by name. Each row carries `city`, `country`,
+  `capacity`, `opened_year`, and a short `description`. `stadium` is
+  a global table (no `tournament_id`); venues exist independently of
+  which edition uses them.
 
 ### Changed
 
