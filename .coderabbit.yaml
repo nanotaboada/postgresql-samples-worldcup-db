@@ -1,0 +1,291 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+# CodeRabbit configuration for postgresql-samples-worldcup-db.
+#
+# Based on the organization-level defaults dumped via
+# `@coderabbitai configuration` on PR #1, with these intentional changes:
+#
+#   1. reviews.auto_review.labels: emptied (was ['planning']).
+#      The org default required a "planning" label before any PR was
+#      auto-reviewed, which silently skipped review on PR #1. Empty
+#      list = review every PR.
+#
+#   2. reviews.path_instructions: added project-specific guidance for
+#      SQL files, ADRs, and seed data so reviews carry the right
+#      conventions and ADR cross-references.
+#
+# Reference: https://docs.coderabbit.ai/getting-started/configure-coderabbit
+
+language: en-US
+tone_instructions: ''
+early_access: true
+enable_free_tier: true
+inheritance: false
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_instructions: ''
+  high_level_summary_placeholder: '@coderabbitai summary'
+  high_level_summary_in_walkthrough: false
+  auto_title_placeholder: '@coderabbitai'
+  auto_title_instructions: ''
+  review_status: true
+  review_details: false
+  commit_status: true
+  fail_commit_status: false
+  collapse_walkthrough: false
+  changed_files_summary: true
+  sequence_diagrams: true
+  estimate_code_review_effort: true
+  assess_linked_issues: true
+  related_issues: true
+  related_prs: false
+  suggested_labels: false
+  labeling_instructions: []
+  auto_apply_labels: false
+  suggested_reviewers: false
+  auto_assign_reviewers: false
+  suggested_reviewers_instructions: []
+  in_progress_fortune: true
+  poem: false
+  enable_prompt_for_ai_agents: true
+  path_filters: []
+  path_instructions:
+    - path: 'sql/schema/**/*.sql'
+      instructions: |
+        PostgreSQL 17 DDL. Verify:
+        - Native ENUM types are used for fixed domains (per ADR-0003).
+        - Per-tournament tables carry `tournament_id` directly (per ADR-0001).
+        - Primary keys are `smallint GENERATED ALWAYS AS IDENTITY` (per ADR-0006).
+        - Composite UNIQUE constraints use `tournament_id` as the leading column where applicable.
+        - Index strategy targets `WHERE tournament_id = ?` filtering.
+    - path: 'sql/seed/**/*.sql'
+      instructions: |
+        Seed data files contain only INSERT statements (and CTE setup at file head to
+        resolve `tournament_id`). Verify row counts match what is documented in
+        CHANGELOG.md and the proposal. Do not include schema changes here — those
+        belong in `sql/schema/`.
+    - path: 'sql/verify/**/*.sql'
+      instructions: |
+        Verification queries. Use PL/pgSQL `DO ... ASSERT` blocks per ADR-0005. Each
+        block scopes to one phase via a `DECLARE qatar2022_id smallint;` local. CI
+        invokes with `psql -v ON_ERROR_STOP=1`, so the first failed assertion fails
+        the workflow.
+    - path: 'docs/adr/*.md'
+      instructions: |
+        Architecture Decision Records. Append-only — existing ADRs must not be edited;
+        supersede via a new ADR. New ADRs use the Nygard format from template.md and
+        must include Status, Context, Alternatives Considered, Decision, Consequences.
+    - path: 'scripts/**/*.py'
+      instructions: |
+        One-time Python ETL. Output is checked-in `sql/seed/*.sql`. Prefer modern
+        Python (3.13+, type hints), `pandas` for CSV, `psycopg` v3 if connecting
+        directly. Scripts are idempotent — re-running overwrites the corresponding
+        seed file.
+    - path: 'compose*.yaml'
+      instructions: |
+        Compose Specification (canonical filename `compose.yaml`, not legacy
+        `docker-compose.yml`). Use `docker compose` CLI form. No `version:` key
+        (obsolete). Optional services go in override files (per ADR-0004).
+  abort_on_close: true
+  disable_cache: false
+  slop_detection:
+    enabled: true
+  auto_review:
+    enabled: true
+    description_keyword: ''
+    auto_incremental_review: true
+    auto_pause_after_reviewed_commits: 5
+    ignore_title_keywords: []
+    labels: []                       # was ['planning'] — review every PR
+    drafts: false
+    base_branches: []
+    ignore_usernames: []
+  finishing_touches:
+    docstrings:
+      enabled: true
+    unit_tests:
+      enabled: true
+    simplify:
+      enabled: false
+    custom: []
+  pre_merge_checks:
+    override_requested_reviewers_only: false
+    docstrings:
+      mode: warning
+      threshold: 80
+    title:
+      mode: warning
+      requirements: ''
+    description:
+      mode: warning
+    issue_assessment:
+      mode: warning
+    custom_checks: []
+  tools:
+    ast-grep:
+      rule_dirs: []
+      util_dirs: []
+      essential_rules: true
+      packages: []
+    shellcheck:
+      enabled: true
+    ruff:
+      enabled: true
+    markdownlint:
+      enabled: true
+    github-checks:
+      enabled: true
+      timeout_ms: 90000
+    languagetool:
+      enabled: true
+      enabled_rules: []
+      disabled_rules: []
+      enabled_categories: []
+      disabled_categories: []
+      enabled_only: false
+      level: default
+    biome:
+      enabled: true
+    hadolint:
+      enabled: true
+    swiftlint:
+      enabled: true
+    phpstan:
+      enabled: true
+      level: default
+    phpmd:
+      enabled: true
+    phpcs:
+      enabled: true
+    golangci-lint:
+      enabled: true
+    yamllint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    trufflehog:
+      enabled: true
+    checkov:
+      enabled: true
+    tflint:
+      enabled: true
+    detekt:
+      enabled: true
+    eslint:
+      enabled: true
+    flake8:
+      enabled: true
+    fortitudeLint:
+      enabled: true
+    rubocop:
+      enabled: true
+    buf:
+      enabled: true
+    regal:
+      enabled: true
+    actionlint:
+      enabled: true
+    pmd:
+      enabled: true
+    clang:
+      enabled: true
+    cppcheck:
+      enabled: true
+    opengrep:
+      enabled: true
+    semgrep:
+      enabled: true
+    circleci:
+      enabled: true
+    clippy:
+      enabled: true
+    sqlfluff:
+      enabled: true
+    trivy:
+      enabled: true
+    prismaLint:
+      enabled: true
+    pylint:
+      enabled: true
+    oxc:
+      enabled: true
+    shopifyThemeCheck:
+      enabled: true
+    luacheck:
+      enabled: true
+    brakeman:
+      enabled: true
+    dotenvLint:
+      enabled: true
+    htmlhint:
+      enabled: true
+    stylelint:
+      enabled: true
+    checkmake:
+      enabled: true
+    osvScanner:
+      enabled: true
+    blinter:
+      enabled: true
+    smartyLint:
+      enabled: true
+    emberTemplateLint:
+      enabled: true
+    psscriptanalyzer:
+      enabled: true
+
+chat:
+  art: true
+  allow_non_org_members: true
+  auto_reply: true
+  integrations:
+    jira:
+      usage: disabled
+    linear:
+      usage: disabled
+
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+    filePatterns: []
+  learnings:
+    scope: auto
+  issues:
+    scope: auto
+  jira:
+    usage: disabled
+    project_keys: []
+  linear:
+    usage: disabled
+    team_keys: []
+  pull_requests:
+    scope: auto
+  mcp:
+    usage: auto
+    disabled_servers: []
+  linked_repositories: []
+
+code_generation:
+  docstrings:
+    language: en-US
+    path_instructions: []
+  unit_tests:
+    path_instructions: []
+
+issue_enrichment:
+  auto_enrich:
+    enabled: true
+  planning:
+    enabled: true
+    auto_planning:
+      enabled: true
+      labels: []
+  labeling:
+    labeling_instructions: []
+    auto_apply_labels: false
