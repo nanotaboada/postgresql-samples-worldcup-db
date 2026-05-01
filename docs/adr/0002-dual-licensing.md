@@ -66,7 +66,7 @@ both StatsBomb's terms and Wikipedia's CC BY-SA.
 ## Consequences
 
 - **Positive.** Legally compliant with StatsBomb's terms. The code
-  side stays permissive (MIT) and consistent with the six API repos.
+  side stays permissive (MIT) and consistent with the companion repositories.
   Downstream users get clear scope boundaries: they can copy the schema
   freely under MIT, and they understand the constraints around
   redistributing the seed data.

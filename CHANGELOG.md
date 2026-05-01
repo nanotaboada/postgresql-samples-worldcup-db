@@ -57,8 +57,7 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
   diagram. Splits tables into global (no `tournament_id`) and
   tournament-scoped (denormalized `tournament_id`).
 - GitHub issue templates: `feature_request.md`, `bug_report.md`, and
-  `config.yml` (blank issues disabled). Mirrors the format used across
-  the six sibling API repositories.
+  `config.yml` (blank issues disabled).
 - Architecture Decision Records — initial set in `docs/adr/`:
   - ADR-0001: Multi-Edition Data Model
   - ADR-0002: Dual Licensing — MIT for Code, CC BY-NC-SA 4.0 for Data
@@ -78,7 +77,7 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
 ---
 
 <!--
-## [X.Y.Z - COACH_NAME] - YYYY-MM-DD
+## [X.Y.Z - HOST-COUNTRY-YEAR] - YYYY-MM-DD
 
 ### Added
 - New features
