@@ -67,8 +67,36 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
   - ADR-0006: `smallint GENERATED ALWAYS AS IDENTITY` for Primary Keys
 - `CONTRIBUTING.md` covering commit conventions, branching, PR
   workflow, ADR three-part test, and CI checks.
+- `.coderabbit.yaml` committing the organization-level CodeRabbit
+  defaults into the repo, with `auto_review.labels` emptied (the org
+  default required a `planning` label to trigger reviews) and
+  per-path review instructions for `sql/`, `docs/adr/`, `scripts/`,
+  and `compose*.yaml`.
+- Phase 1 DDL — `sql/schema/`:
+  - `01_types.sql`: four enum types (`player_position`, `match_stage`,
+    `event_type`, `official_role`) declared upfront per ADR-0003.
+  - `02_tables.sql`: seven Phase 1 tables — `confederation`, `team`,
+    `stadium` (global) plus `tournament`, `tournament_team`,
+    `tournament_group`, `group_standing` (per-tournament). All carry
+    `smallint GENERATED ALWAYS AS IDENTITY` PKs per ADR-0006; per-
+    tournament tables carry `tournament_id` per ADR-0001. Includes
+    domain CHECK constraints (`group_standing.position BETWEEN 1 AND 4`,
+    `won + drawn + lost = played`, `goal_difference = goals_for - goals_against`).
+  - `03_indexes.sql`: `idx_group_standing_tournament` on
+    `group_standing(tournament_id)` — the only Phase 1 table whose
+    UNIQUE constraint doesn't lead with `tournament_id`.
+- `sql/init.sh` — Postgres docker-entrypoint hook that iterates and
+  applies every `*.sql` file in `/repo/sql/schema/` and
+  `/repo/sql/seed/` in alphabetical order.
 
 ### Changed
+
+- `compose.yaml`: volume mounts switched from directory-based
+  (`./sql/schema:/docker-entrypoint-initdb.d/01-schema`, ignored by
+  the postgres entrypoint because it doesn't recurse into
+  subdirectories) to script-driven init via `sql/init.sh` mounted at
+  `/docker-entrypoint-initdb.d/00-init.sh`, with the full `sql/`
+  directory mounted at `/repo/sql/`.
 
 ### Fixed
 
