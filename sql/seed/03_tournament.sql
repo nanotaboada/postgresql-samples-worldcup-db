@@ -4,10 +4,9 @@
 -- Single row representing the Qatar 2022 edition. v1 of this database seeds
 -- only Qatar 2022; future editions will append more rows here.
 --
--- `winner_team_id` is left NULL on insert because the `team` rows it
--- references are seeded in a later sub-ticket (1.3). The reference is
--- backfilled in `04_tournament_teams.sql` once both `team` and
--- `tournament_team` are populated.
+-- This file loads after `02_teams.sql`, so the Argentina row already exists
+-- and `winner_team_id` is resolved inline by lookup. No deferred backfill is
+-- required (which keeps `sql/seed/` strictly INSERT-only per CONTRIBUTING.md).
 -- =============================================================================
 
 INSERT INTO tournament (
@@ -15,11 +14,13 @@ INSERT INTO tournament (
     host_country,
     edition_name,
     start_date,
-    end_date
+    end_date,
+    winner_team_id
 ) VALUES (
     2022,
     'Qatar',
     'FIFA World Cup Qatar 2022',
     '2022-11-20',
-    '2022-12-18'
+    '2022-12-18',
+    (SELECT id FROM team WHERE code = 'ARG')
 );

@@ -12,9 +12,6 @@
 --
 -- Tournament and team identities are looked up by year and code rather than
 -- hard-coded, so the seed survives reordering of upstream files.
---
--- After the INSERT, the deferred `tournament.winner_team_id` from
--- `01_tournament.sql` is backfilled to point at Argentina.
 -- =============================================================================
 
 WITH q22 AS (
@@ -63,10 +60,3 @@ FROM (VALUES
 ) AS src(team_code, fifa_ranking, final_position)
 JOIN team tm ON tm.code = src.team_code
 CROSS JOIN q22;
-
-
--- Backfill: Argentina won Qatar 2022. Resolves the FK left NULL in
--- `01_tournament.sql` (where `team` rows did not yet exist).
-UPDATE tournament
-SET winner_team_id = (SELECT id FROM team WHERE code = 'ARG')
-WHERE year = 2022;
