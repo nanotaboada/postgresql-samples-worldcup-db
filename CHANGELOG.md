@@ -100,6 +100,12 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
   `confederation`. Uses `INSERT ... SELECT FROM (VALUES ...) JOIN
   confederation ON code` so the seed is robust against changes in
   confederation insertion order.
+- Phase 1 seed — `sql/seed/04_tournament_teams.sql`: 32 rows recording
+  each team's Qatar 2022 participation (`fifa_ranking` from the
+  October 2022 FIFA ranking, `final_position` from the official
+  tournament finish — Argentina 1st, France 2nd, Croatia 3rd,
+  Morocco 4th, etc.). Tournament and team identities resolved by
+  year and code, not hard-coded ids.
 
 ### Changed
 
@@ -115,6 +121,12 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
   directory mounted at `/repo/sql/`.
 
 ### Fixed
+
+- `tournament.winner_team_id` for Qatar 2022 backfilled to point at
+  Argentina, resolving the deferred FK left NULL in
+  `01_tournament.sql` because team rows had not yet been seeded at
+  that point. Backfill runs at the tail of
+  `04_tournament_teams.sql`.
 
 ### Removed
 
