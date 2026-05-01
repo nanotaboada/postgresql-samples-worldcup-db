@@ -36,8 +36,10 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
 | 21 | 2018 | Russia                                                                                     | `russia-2018`                  |
 | 22 | 2022 | Qatar                                                                                      | `qatar-2022`                   |
 | 23 | 2026 | Canada, Mexico & United States                                                             | `canada-mexico-usa-2026`       |
-| 24 | 2030 | Spain, Portugal & Morocco *(centennial — opening matches in Argentina, Paraguay, Uruguay)* | `spain-portugal-morocco-2030`  |
+| 24 | 2030 | Spain, Portugal & Morocco                                                                  | `spain-portugal-morocco-2030`  |
 | 25 | 2034 | Saudi Arabia                                                                               | `saudi-arabia-2034`            |
+
+> The 2030 edition marks the World Cup centennial. Three opening matches will be played in Argentina, Paraguay, and Uruguay — the inaugural 1930 hosts and finalists.
 
 ---
 
