@@ -62,12 +62,23 @@ BEGIN
     ASSERT (SELECT winner_team_id FROM tournament WHERE year = 2022) = arg_team_id,
         'expected tournament.winner_team_id for Qatar 2022 to resolve to Argentina';
 
+    -- Stronger than `count(DISTINCT letter) = 8` because it asserts the
+    -- actual set, not just the cardinality. Covered by schema CHECK +
+    -- UNIQUE constraints in practice; this is defence-in-depth.
+    ASSERT NOT EXISTS (
+        SELECT 1
+        FROM tournament_group
+        WHERE tournament_id = qatar2022_id
+          AND letter NOT IN ('A','B','C','D','E','F','G','H')
+    ),
+        'every Qatar 2022 group letter must be one of A-H';
+
     ASSERT (
-        SELECT count(DISTINCT letter)
+        SELECT count(*)
         FROM tournament_group
         WHERE tournament_id = qatar2022_id
     ) = 8,
-        'expected 8 distinct group letters for Qatar 2022';
+        'expected exactly 8 group rows for Qatar 2022';
 
     ASSERT NOT EXISTS (
         SELECT group_id
@@ -87,13 +98,18 @@ BEGIN
     ),
         'positions 1-4 must each appear exactly once per Qatar 2022 group';
 
-    -- The team at final_position 1 in tournament_team must be Argentina.
+    -- Exactly one tournament_team row should match Argentina-as-champion.
+    -- Combines two checks (single champion row + correct team) into one
+    -- assertion so an extra row at final_position=1 fails with a clear
+    -- message rather than triggering a scalar-subquery overflow error.
     ASSERT (
-        SELECT team_id
+        SELECT count(*)
         FROM tournament_team
-        WHERE tournament_id = qatar2022_id AND final_position = 1
-    ) = arg_team_id,
-        'tournament_team.final_position = 1 must be Argentina for Qatar 2022';
+        WHERE tournament_id = qatar2022_id
+          AND final_position = 1
+          AND team_id = arg_team_id
+    ) = 1,
+        'expected exactly one Qatar 2022 champion row, and it must be Argentina';
 
     -- ------------------------------------------------------------
     -- Cross-data consistency
