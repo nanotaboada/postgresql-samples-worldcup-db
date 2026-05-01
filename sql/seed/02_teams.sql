@@ -4,7 +4,7 @@
 -- The 32 teams that participated in the FIFA World Cup Qatar 2022. `team` is
 -- a global table (no `tournament_id`); per-tournament participation
 -- attributes (FIFA ranking, group, final position) live in `tournament_team`
--- and are seeded in sub-ticket 1.4.
+-- and are seeded in sub-issue 1.4.
 --
 -- Codes are FIFA's official 3-letter abbreviations. Confederations are
 -- looked up by code rather than hard-coded id, so this seed is robust
