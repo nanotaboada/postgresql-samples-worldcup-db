@@ -11,33 +11,33 @@ This project uses **FIFA World Cup editions** as release codenames, advancing ch
 
 The sibling API repositories use an A-Z football-coaches theme; this database project departs from that convention because its organising principle is *time* (the historical sequence of tournaments) rather than alphabet.
 
-| #  | Year | Host(s)                                                                                    | Tag Name                       |
-|----|------|--------------------------------------------------------------------------------------------|--------------------------------|
-| 1  | 1930 | Uruguay                                                                                    | `uruguay-1930`                 |
-| 2  | 1934 | Italy                                                                                      | `italy-1934`                   |
-| 3  | 1938 | France                                                                                     | `france-1938`                  |
-| 4  | 1950 | Brazil                                                                                     | `brazil-1950`                  |
-| 5  | 1954 | Switzerland                                                                                | `switzerland-1954`             |
-| 6  | 1958 | Sweden                                                                                     | `sweden-1958`                  |
-| 7  | 1962 | Chile                                                                                      | `chile-1962`                   |
-| 8  | 1966 | England                                                                                    | `england-1966`                 |
-| 9  | 1970 | Mexico                                                                                     | `mexico-1970`                  |
-| 10 | 1974 | West Germany                                                                               | `west-germany-1974`            |
-| 11 | 1978 | Argentina                                                                                  | `argentina-1978`               |
-| 12 | 1982 | Spain                                                                                      | `spain-1982`                   |
-| 13 | 1986 | Mexico                                                                                     | `mexico-1986`                  |
-| 14 | 1990 | Italy                                                                                      | `italy-1990`                   |
-| 15 | 1994 | United States                                                                              | `usa-1994`                     |
-| 16 | 1998 | France                                                                                     | `france-1998`                  |
-| 17 | 2002 | South Korea & Japan                                                                        | `south-korea-japan-2002`       |
-| 18 | 2006 | Germany                                                                                    | `germany-2006`                 |
-| 19 | 2010 | South Africa                                                                               | `south-africa-2010`            |
-| 20 | 2014 | Brazil                                                                                     | `brazil-2014`                  |
-| 21 | 2018 | Russia                                                                                     | `russia-2018`                  |
-| 22 | 2022 | Qatar                                                                                      | `qatar-2022`                   |
-| 23 | 2026 | Canada, Mexico & United States                                                             | `canada-mexico-usa-2026`       |
-| 24 | 2030 | Spain, Portugal & Morocco                                                                  | `spain-portugal-morocco-2030`  |
-| 25 | 2034 | Saudi Arabia                                                                               | `saudi-arabia-2034`            |
+| #  | Year | Host(s)                        | Tag Name                      |
+|----|------|--------------------------------|-------------------------------|
+| 1  | 1930 | Uruguay                        | `uruguay-1930`                |
+| 2  | 1934 | Italy                          | `italy-1934`                  |
+| 3  | 1938 | France                         | `france-1938`                 |
+| 4  | 1950 | Brazil                         | `brazil-1950`                 |
+| 5  | 1954 | Switzerland                    | `switzerland-1954`            |
+| 6  | 1958 | Sweden                         | `sweden-1958`                 |
+| 7  | 1962 | Chile                          | `chile-1962`                  |
+| 8  | 1966 | England                        | `england-1966`                |
+| 9  | 1970 | Mexico                         | `mexico-1970`                 |
+| 10 | 1974 | West Germany                   | `west-germany-1974`           |
+| 11 | 1978 | Argentina                      | `argentina-1978`              |
+| 12 | 1982 | Spain                          | `spain-1982`                  |
+| 13 | 1986 | Mexico                         | `mexico-1986`                 |
+| 14 | 1990 | Italy                          | `italy-1990`                  |
+| 15 | 1994 | United States                  | `usa-1994`                    |
+| 16 | 1998 | France                         | `france-1998`                 |
+| 17 | 2002 | South Korea & Japan            | `south-korea-japan-2002`      |
+| 18 | 2006 | Germany                        | `germany-2006`                |
+| 19 | 2010 | South Africa                   | `south-africa-2010`           |
+| 20 | 2014 | Brazil                         | `brazil-2014`                 |
+| 21 | 2018 | Russia                         | `russia-2018`                 |
+| 22 | 2022 | Qatar                          | `qatar-2022`                  |
+| 23 | 2026 | Canada, Mexico & United States | `canada-mexico-usa-2026`      |
+| 24 | 2030 | Spain, Portugal & Morocco      | `spain-portugal-morocco-2030` |
+| 25 | 2034 | Saudi Arabia                   | `saudi-arabia-2034`           |
 
 > The 2030 edition marks the World Cup centennial. Three opening matches will be played in Argentina, Paraguay, and Uruguay — the inaugural 1930 hosts and finalists.
 
