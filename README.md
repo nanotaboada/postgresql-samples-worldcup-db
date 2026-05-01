@@ -8,7 +8,7 @@ This is a sibling project to a series of educational RESTful API samples in .NET
 
 ## 🗺️ Roadmap
 
-The database is built in six phases, each tracked as a GitHub epic with a sub-ticket checklist. Phases are sequential — each builds on the data landed by the previous one.
+The database is built in six phases, each tracked as a GitHub epic with a sub-issue checklist. Phases are sequential — each builds on the data landed by the previous one.
 
 | Phase                                       | Epic                                                                                | Status      |
 |---------------------------------------------|-------------------------------------------------------------------------------------|-------------|
@@ -19,7 +19,7 @@ The database is built in six phases, each tracked as a GitHub epic with a sub-ti
 | **5 — Match Events** (goals, cards, subs)   | [#17](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/17)      | ⏳ pending  |
 | **6 — Penalty Shootouts**                   | [#18](https://github.com/nanotaboada/postgresql-samples-worldcup-db/issues/18)      | ⏳ pending  |
 
-Each epic body has data-source pointers, known gotchas, and per-sub-ticket model recommendations (`model:opus` for design-density tickets, `model:sonnet` for mechanical execution).
+Each epic body has data-source pointers, known gotchas, and per-sub-issue model recommendations (`model:opus` for design-density tickets, `model:sonnet` for mechanical execution).
 
 ## 🐳 Quickstart
 
