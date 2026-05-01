@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ============================================================
+# ==============================================================================
 # Postgres docker-entrypoint init hook.
 #
 # The postgres image's entrypoint only processes files at the top
@@ -10,7 +10,7 @@
 # Schema files load first (DDL: types, tables, indexes), then seed
 # files (per-phase data). Each file is run with ON_ERROR_STOP=1, so
 # the first failure aborts container startup.
-# ============================================================
+# ==============================================================================
 
 set -euo pipefail
 

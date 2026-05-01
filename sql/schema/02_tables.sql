@@ -1,6 +1,6 @@
--- ============================================================
+-- =============================================================================
 -- Phase 1 — Tables
--- ============================================================
+-- =============================================================================
 -- Foundational tournament structure: identity tables (confederation,
 -- team), the tournament root with edition-specific scoping
 -- (tournament_team, tournament_group, group_standing), and venues
@@ -11,12 +11,12 @@
 -- team, stadium — do not.
 --
 -- Primary keys are smallint identity columns (ADR-0006).
--- ============================================================
+-- =============================================================================
 
 
--- ------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 -- Global tables (no tournament_id)
--- ------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 
 CREATE TABLE confederation (
     id    smallint    GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -42,9 +42,9 @@ CREATE TABLE stadium (
 );
 
 
--- ------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 -- Tournament root + per-tournament tables
--- ------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 
 CREATE TABLE tournament (
     id              smallint    GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -70,8 +70,9 @@ CREATE TABLE tournament_team (
 CREATE TABLE tournament_group (
     id             smallint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     tournament_id  smallint NOT NULL REFERENCES tournament(id),
-    letter         char(1)  NOT NULL CHECK (letter IN ('A','B','C','D','E','F','G','H')),
-    UNIQUE (tournament_id, letter)
+    letter         char(1)  NOT NULL,
+    UNIQUE (tournament_id, letter),
+    CHECK (letter IN ('A','B','C','D','E','F','G','H'))
 );
 
 CREATE TABLE group_standing (

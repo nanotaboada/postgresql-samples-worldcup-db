@@ -1,11 +1,11 @@
--- ============================================================
+-- =============================================================================
 -- Phase 1 — Enum types
--- ============================================================
+-- =============================================================================
 -- All four enum types are declared upfront (not just the ones used
 -- by Phase 1 tables) per ADR-0003. The vocabularies are stable
 -- across editions and tables; defining them here lets later phases
 -- reference them without schema migration.
--- ============================================================
+-- =============================================================================
 
 CREATE TYPE player_position AS ENUM ('GK', 'DF', 'MF', 'FW');
 
