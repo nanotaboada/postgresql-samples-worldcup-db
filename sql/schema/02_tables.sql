@@ -19,9 +19,9 @@
 -- -----------------------------------------------------------------------------
 
 CREATE TABLE confederation (
-    id    smallint    GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name  varchar(50) NOT NULL,
-    code  varchar(10) NOT NULL UNIQUE
+    id    smallint     GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name  varchar(100) NOT NULL,
+    code  varchar(10)  NOT NULL UNIQUE
 );
 
 CREATE TABLE team (
