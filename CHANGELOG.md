@@ -114,6 +114,18 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
   `capacity`, `opened_year`, and a short `description`. `stadium` is
   a global table (no `tournament_id`); venues exist independently of
   which edition uses them.
+- Phase 1 seed — `sql/seed/06_tournament_groups.sql`: the eight
+  group-stage groups for Qatar 2022 (letters A–H), scoped by
+  `tournament_id`.
+- Phase 1 seed — `sql/seed/07_group_standings.sql`: the 32 final
+  group-stage standings for Qatar 2022 (4 teams per group × 8 groups).
+  Each row stores `played`, `won`, `drawn`, `lost`, `goals_for`,
+  `goals_against`, `goal_difference`, `points`, and `position`,
+  satisfying the schema's CHECK invariants
+  (`won + drawn + lost = played`,
+  `goal_difference = goals_for - goals_against`,
+  `position BETWEEN 1 AND 4`). Data sourced from FIFA's Qatar 2022
+  official records.
 
 ### Changed
 
