@@ -92,9 +92,21 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
   for FIFA World Cup Qatar 2022 (year 2022, host Qatar, dates
   2022-11-20 to 2022-12-18). `winner_team_id` left NULL; backfilled
   in a later sub-ticket once team rows exist.
+- Phase 1 seed — `sql/seed/02_confederations.sql`: six FIFA continental
+  confederations (AFC, CAF, CONCACAF, CONMEBOL, OFC, UEFA), inserted
+  alphabetically by code so identities are predictable.
+- Phase 1 seed — `sql/seed/03_teams.sql`: the 32 national teams that
+  participated in Qatar 2022, with FIFA 3-letter codes and FK to
+  `confederation`. Uses `INSERT ... SELECT FROM (VALUES ...) JOIN
+  confederation ON code` so the seed is robust against changes in
+  confederation insertion order.
 
 ### Changed
 
+- `sql/schema/02_tables.sql`: `confederation.name` widened from
+  `varchar(50)` to `varchar(100)` so CONCACAF's full official name
+  (*"Confederation of North, Central America and Caribbean Association
+  Football"*, 73 chars) fits without truncation.
 - `compose.yaml`: volume mounts switched from directory-based
   (`./sql/schema:/docker-entrypoint-initdb.d/01-schema`, ignored by
   the postgres entrypoint because it doesn't recurse into
