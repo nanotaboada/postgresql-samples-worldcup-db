@@ -37,6 +37,22 @@ We value **incremental, detail‑first contributions** over big rewrites or abst
   - Seed files only contain `INSERT` statements (and CTE setup at the head of each file).
   - Verification assertions live in `sql/verify/` and run in CI.
 
+- **Line Widths**
+  Layered by surface — narrow for prose, wider for code, and let the tools
+  decide the rest. GitHub's split-diff renders cleanly at every width below.
+
+  | Surface                                  | Width        | Why                                                                                              |
+  |------------------------------------------|--------------|--------------------------------------------------------------------------------------------------|
+  | Comments & section dividers (any file)   | **80 cols**  | Reads as prose. Fits GitHub's split-diff view on both panes without horizontal scroll.           |
+  | SQL code (`sql/**/*.sql`)                | **100 cols** | Multi-column FK declarations, composite UNIQUEs, and CHECK lists routinely run long.             |
+  | Shell scripts (`*.sh`)                   | **100 cols** | `psql` invocations and pipelines get long; tighter wrapping hurts readability.                   |
+  | Python (`scripts/**/*.py`)               | **88 cols**  | [Black](https://black.readthedocs.io/)'s default. Don't fight the formatter.                     |
+  | YAML / JSON / TOML                       | not enforced | Path values, URLs, and CodeRabbit instructions naturally exceed any cap.                         |
+  | Markdown prose                           | not enforced | Tables, code blocks, and callouts always blow through any line limit. Soft-wrap in your editor.  |
+
+  Most modern editors render 100 cols comfortably, and 100 stays well under
+  GitHub's ~127-col no-scroll threshold for code views, blame, and review.
+
 ## 3. Branching and Pull Requests
 
 - **Branch per Issue/ticket**, named with conventional-commit-style prefixes:
