@@ -88,18 +88,25 @@ The sibling API repositories use an A-Z football-coaches theme; this database pr
 - `sql/init.sh` — Postgres docker-entrypoint hook that iterates and
   applies every `*.sql` file in `/repo/sql/schema/` and
   `/repo/sql/seed/` in alphabetical order.
-- Phase 1 seed — `sql/seed/01_tournament.sql`: single tournament row
-  for FIFA World Cup Qatar 2022 (year 2022, host Qatar, dates
-  2022-11-20 to 2022-12-18). `winner_team_id` left NULL; backfilled
-  in a later sub-ticket once team rows exist.
-- Phase 1 seed — `sql/seed/02_confederations.sql`: six FIFA continental
+- Phase 1 seed — `sql/seed/01_confederations.sql`: six FIFA continental
   confederations (AFC, CAF, CONCACAF, CONMEBOL, OFC, UEFA), inserted
   alphabetically by code so identities are predictable.
-- Phase 1 seed — `sql/seed/03_teams.sql`: the 32 national teams that
+- Phase 1 seed — `sql/seed/02_teams.sql`: the 32 national teams that
   participated in Qatar 2022, with FIFA 3-letter codes and FK to
   `confederation`. Uses `INSERT ... SELECT FROM (VALUES ...) JOIN
   confederation ON code` so the seed is robust against changes in
   confederation insertion order.
+- Phase 1 seed — `sql/seed/03_tournament.sql`: single tournament row
+  for FIFA World Cup Qatar 2022 (year 2022, host Qatar, dates
+  2022-11-20 to 2022-12-18). Loads after `team`, so `winner_team_id`
+  resolves to Argentina inline by `(SELECT id FROM team WHERE
+  code = 'ARG')` — no deferred backfill needed.
+- Phase 1 seed — `sql/seed/04_tournament_teams.sql`: 32 rows recording
+  each team's Qatar 2022 participation (`fifa_ranking` from the
+  October 2022 FIFA ranking, `final_position` from the official
+  tournament finish — Argentina 1st, France 2nd, Croatia 3rd,
+  Morocco 4th, etc.). Tournament and team identities resolved by
+  year and code, not hard-coded ids.
 
 ### Changed
 
